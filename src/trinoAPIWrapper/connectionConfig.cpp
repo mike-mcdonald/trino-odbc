@@ -31,6 +31,10 @@ curlHeaderCallback(char* buffer, size_t size, size_t nitems, void* userdata) {
     if (firstColon != std::string::npos) {
       std::string key   = headerData.substr(0, firstColon);
       std::string value = headerData.substr(firstColon + 1);
+
+      // Convert the key to lowercase
+      std::transform(key.begin(), key.end(), key.begin(), ::tolower);
+
       // The values usually end in \r\n at a minimum, so we need
       // to trim that off.
       trim(value);
